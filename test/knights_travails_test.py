@@ -11,8 +11,10 @@ class KnightsMovementTest(unittest.TestCase):
 
     def test_generate_valid_moves_limits_to_the_board_size(self):
         moves = generate_valid_moves((0, 0))
-
         self.assertEqual([(1, 2), (2, 1)], moves)
+
+        moves = generate_valid_moves((7, 7))
+        self.assertEqual([(6, 5), (5, 6)], moves)
 
 
 if __name__ == '__main__':
