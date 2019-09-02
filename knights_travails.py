@@ -18,4 +18,4 @@ def generate_valid_moves(position):
 
 
 def is_valid_move(end_position):
-    return end_position[0] > 0 and end_position[1] > 0 and end_position[0] < BOARD_SIZE and end_position[1] < BOARD_SIZE
+    return 0 < end_position[0] < BOARD_SIZE and 0 < end_position[1] < BOARD_SIZE
