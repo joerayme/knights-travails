@@ -6,6 +6,12 @@ ASCII_A = 65
 
 
 def generate_valid_moves(position):
+    """
+    Generates a list of all valid moves from a given position
+
+    :param position: A position from which to generate all valid moves
+    :return: List of all valid moves from the given position
+    """
     x, y = position
     moves = []
 
@@ -22,16 +28,23 @@ def generate_valid_moves(position):
 
 
 def is_valid_move(end_position):
+    """
+    Determines if the given position is in the board
+
+    :param end_position: The position to evaluate
+    :return: Boolean whether the position is on the board or not
+    """
     return 0 <= end_position[0] < BOARD_SIZE and 0 <= end_position[1] < BOARD_SIZE
 
 
-def generate_tree(start_position, prev_position=None):
-    for move in generate_valid_moves(start_position):
-        if prev_position is None or prev_position != move:
-            yield {'pos': move, 'prev': prev_position}
-
-
 def get_shortest_path(start, target):
+    """
+    Gets the shortest path between start and target
+
+    :param start:
+    :param target:
+    :return: A list of positions between start and target
+    """
     queue = [(start, [])]
 
     while queue:
@@ -45,10 +58,22 @@ def get_shortest_path(start, target):
 
 
 def get_chess_notation(position):
+    """
+    Returns the chess notation of a given position
+
+    :param position:
+    :return:
+    """
     return f'{chr(position[0] + ASCII_A)}{position[1] + 1}'
 
 
 def parse_chess_notation(position):
+    """
+    Parses chess notation into a position and validates it is correct notation
+
+    :param position: A chess board position in notation e.g. A5
+    :return: A tuple position
+    """
     error = f'"{position}" is not valid chess notation'
     try:
         pos = ord(position[0].upper()) - ASCII_A, int(position[1]) - 1
