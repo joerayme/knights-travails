@@ -16,6 +16,11 @@ class KnightsMovementTest(unittest.TestCase):
         moves = generate_valid_moves((7, 7))
         self.assertEqual([(6, 5), (5, 6)], moves)
 
+    def test_get_shortest_path_returns_shortest_distance(self):
+        moves = get_shortest_path((0, 7), (1, 6))
+
+        self.assertEqual(4, len(moves))
+
 
 if __name__ == '__main__':
     unittest.main()
