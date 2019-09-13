@@ -51,7 +51,7 @@ def get_chess_notation(position):
 def parse_chess_notation(position):
     error = f'"{position}" is not valid chess notation'
     try:
-        pos = ord(position[0]) - ASCII_A, int(position[1]) - 1
+        pos = ord(position[0].upper()) - ASCII_A, int(position[1]) - 1
     except ValueError:
         raise ValueError(error)
 

@@ -38,6 +38,14 @@ class KnightsMovementTest(unittest.TestCase):
 
         get_shortest_path_mock.assert_called_once_with((0, 0), (1, 1))
 
+    @patch('knights_travails.get_shortest_path')
+    def test_main_handles_lowercase_chess_notation(self, get_shortest_path_mock):
+        get_shortest_path_mock.return_value = [(2, 2), (1, 1)]
+
+        self.assertEqual('C3 B2', main(['a1', 'b2']))
+
+        get_shortest_path_mock.assert_called_once_with((0, 0), (1, 1))
+
     def test_main_does_not_parse_invalid_chess_position(self):
         try:
             main(['99', 'B2'])
