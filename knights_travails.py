@@ -60,9 +60,7 @@ def parse_chess_notation(position):
     return pos
 
 
-def main(input_string):
-    positions = input_string.split(' ')
-
+def main(positions):
     if len(positions) != 2:
         raise ValueError('Did not receive two chess notation positions')
 
@@ -74,4 +72,4 @@ def main(input_string):
 
 
 if __name__ == '__main__':
-    print(main(' '.join(sys.argv[1:])))
+    print(main(sys.argv[1:]))

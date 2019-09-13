@@ -31,34 +31,34 @@ class KnightsMovementTest(unittest.TestCase):
     def test_main_parses_input_and_returns_correct_output(self, get_shortest_path_mock):
         get_shortest_path_mock.return_value = [(2, 2), (1, 1)]
 
-        self.assertEqual('C3 B2', main('A1 B2'))
+        self.assertEqual('C3 B2', main(['A1', 'B2']))
 
         get_shortest_path_mock.assert_called_once_with((0, 0), (1, 1))
 
     def test_main_does_not_parse_invalid_chess_position(self):
         try:
-            main('99 B2')
+            main(['99', 'B2'])
             self.fail('Expected parsing of "99" to fail')
         except ValueError as e:
             self.assertEqual('"99" is not valid chess notation', str(e))
 
     def test_main_does_not_parse_invalid_chess_notation(self):
         try:
-            main('A1 chess')
+            main(['A1', 'chess'])
             self.fail('Expected parsing of "chess" to fail')
         except ValueError as e:
             self.assertEqual('"chess" is not valid chess notation', str(e))
 
     def test_main_does_not_parse_chess_notation_that_is_too_long(self):
         try:
-            main('A1 A111')
+            main(['A1', 'A111'])
             self.fail('Expected parsing of "A111" to fail')
         except ValueError as e:
             self.assertEqual('"A111" is not valid chess notation', str(e))
 
     def test_main_checks_number_of_args(self):
         try:
-            main('A1')
+            main(['A1'])
             self.fail('Expected "A1" input to be too short')
         except ValueError as e:
             self.assertEqual('Did not receive two chess notation positions', str(e))
