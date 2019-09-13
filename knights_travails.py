@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+import random
 
 BOARD_SIZE = 8
 ASCII_A = 65
@@ -61,16 +62,46 @@ def parse_chess_notation(position):
     return pos
 
 
+def print_chess_board(moves):
+    for y in reversed(range(BOARD_SIZE)):
+        yield "\n"
+        for x in range(BOARD_SIZE):
+            if x == 0:
+                yield f"{y + 1} "
+
+            try:
+                ch = moves.index((x, y)) + 1
+            except ValueError:
+                ch = ' '
+
+            color = 104 if (x + y) % 2 == 0 else 100
+            yield f"\033[{color}m {ch} \033[0m"
+
+    yield "\n  "
+
+    for x in range(BOARD_SIZE):
+        yield f" {chr(x + ASCII_A)} "
+
+
 def main(positions):
     if len(positions) != 2:
         raise ValueError('Did not receive two chess notation positions')
 
     start, end = positions
 
-    path = get_shortest_path(parse_chess_notation(start), parse_chess_notation(end))
+    print(f"\n{get_chess_notation(start)} to {get_chess_notation(end)}")
 
-    return ' '.join([get_chess_notation(pos) for pos in path])
+    path = get_shortest_path(start, end)
+
+    return ''.join(print_chess_board([start] + [pos for pos in path]))
+
+
+def generate_random_position():
+    return random.randint(0, BOARD_SIZE - 1), random.randint(0, BOARD_SIZE - 1)
 
 
 if __name__ == '__main__':
-    print(main(sys.argv[1:]))
+    number = int(sys.argv[1])
+
+    for _ in range(number):
+        print(main([generate_random_position(), generate_random_position()]))
