@@ -38,9 +38,16 @@ class KnightsMovementTest(unittest.TestCase):
     def test_main_does_not_parse_invalid_chess_position(self):
         try:
             main('99 B2')
-            self.fail('Expected parsing of 99 to fail')
+            self.fail('Expected parsing of "99" to fail')
         except ValueError as e:
-            self.assertEqual('99 is not valid chess notation', str(e))
+            self.assertEqual('"99" is not valid chess notation', str(e))
+
+    def test_main_does_not_parse_invalid_chess_notation(self):
+        try:
+            main('A1 chess')
+            self.fail('Expected parsing of "chess" to fail')
+        except ValueError as e:
+            self.assertEqual('"chess" is not valid chess notation', str(e))
 
 
 if __name__ == '__main__':
