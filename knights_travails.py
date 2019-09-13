@@ -52,7 +52,7 @@ def parse_chess_notation(position):
     except ValueError:
         raise ValueError(error)
 
-    if not is_valid_move(pos):
+    if len(position) != 2 or not is_valid_move(pos):
         raise ValueError(error)
 
     return pos

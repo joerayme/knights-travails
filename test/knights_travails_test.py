@@ -49,6 +49,13 @@ class KnightsMovementTest(unittest.TestCase):
         except ValueError as e:
             self.assertEqual('"chess" is not valid chess notation', str(e))
 
+    def test_main_does_not_parse_chess_notation_that_is_too_long(self):
+        try:
+            main('A1 A111')
+            self.fail('Expected parsing of "A111" to fail')
+        except ValueError as e:
+            self.assertEqual('"A111" is not valid chess notation', str(e))
+
 
 if __name__ == '__main__':
     unittest.main()
