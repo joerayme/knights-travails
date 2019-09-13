@@ -1,4 +1,5 @@
 BOARD_SIZE = 8
+ASCII_A = 65
 
 
 def generate_valid_moves(position):
@@ -38,3 +39,19 @@ def get_shortest_path(start, target):
                 return path + [target]
             else:
                 queue.append((next_move, path + [next_move]))
+
+
+def get_chess_notation(position):
+    return f'{chr(position[0] + ASCII_A)}{position[1] + 1}'
+
+
+def parse_chess_notation(position):
+    return ord(position[0]) - ASCII_A, int(position[1]) - 1
+
+
+def main(input_string):
+    start, end = input_string.split(' ')
+
+    path = get_shortest_path(parse_chess_notation(start), parse_chess_notation(end))
+
+    return ' '.join([get_chess_notation(pos) for pos in path])

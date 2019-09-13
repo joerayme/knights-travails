@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from knights_travails import *
 
@@ -20,6 +21,19 @@ class KnightsMovementTest(unittest.TestCase):
         moves = get_shortest_path((0, 7), (1, 6))
 
         self.assertEqual(4, len(moves))
+
+    def test_get_chess_notation_displays_correct_format(self):
+        self.assertEqual(get_chess_notation((0, 0)), 'A1')
+        self.assertEqual(get_chess_notation((0, 1)), 'A2')
+        self.assertEqual(get_chess_notation((4, 7)), 'E8')
+
+    @patch('knights_travails.get_shortest_path')
+    def test_main_parses_input_and_returns_correct_output(self, get_shortest_path_mock):
+        get_shortest_path_mock.return_value = [(2, 2), (1, 1)]
+
+        self.assertEqual('C3 B2', main('A1 B2'))
+
+        get_shortest_path_mock.assert_called_once_with((0, 0), (1, 1))
 
 
 if __name__ == '__main__':
