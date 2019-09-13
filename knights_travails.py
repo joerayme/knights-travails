@@ -19,7 +19,7 @@ def generate_valid_moves(position):
 
 
 def is_valid_move(end_position):
-    return 0 < end_position[0] < BOARD_SIZE and 0 < end_position[1] < BOARD_SIZE
+    return 0 <= end_position[0] < BOARD_SIZE and 0 <= end_position[1] < BOARD_SIZE
 
 
 def generate_tree(start_position, prev_position=None):
@@ -46,7 +46,12 @@ def get_chess_notation(position):
 
 
 def parse_chess_notation(position):
-    return ord(position[0]) - ASCII_A, int(position[1]) - 1
+    pos = ord(position[0]) - ASCII_A, int(position[1]) - 1
+
+    if not is_valid_move(pos):
+        raise ValueError(f'{position} is not valid chess notation')
+
+    return pos
 
 
 def main(input_string):

@@ -35,6 +35,13 @@ class KnightsMovementTest(unittest.TestCase):
 
         get_shortest_path_mock.assert_called_once_with((0, 0), (1, 1))
 
+    def test_main_does_not_parse_invalid_chess_position(self):
+        try:
+            main('99 B2')
+            self.fail('Expected parsing of 99 to fail')
+        except ValueError as e:
+            self.assertEqual('99 is not valid chess notation', str(e))
+
 
 if __name__ == '__main__':
     unittest.main()
