@@ -13,16 +13,14 @@ def generate_valid_moves(position):
     :return: List of all valid moves from the given position
     """
     x, y = position
-    moves = []
-
-    moves.append((x + 1, y + 2))
-    moves.append((x + 1, y - 2))
-    moves.append((x - 1, y + 2))
-    moves.append((x - 1, y - 2))
-    moves.append((x + 2, y + 1))
-    moves.append((x - 2, y + 1))
-    moves.append((x + 2, y - 1))
-    moves.append((x - 2, y - 1))
+    moves = [(x + 1, y + 2),
+             (x + 1, y - 2),
+             (x - 1, y + 2),
+             (x - 1, y - 2),
+             (x + 2, y + 1),
+             (x - 2, y + 1),
+             (x + 2, y - 1),
+             (x - 2, y - 1)]
 
     return [pos for pos in moves if is_valid_move(pos)]
 
