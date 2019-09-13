@@ -1,3 +1,5 @@
+import sys
+
 BOARD_SIZE = 8
 ASCII_A = 65
 
@@ -59,8 +61,17 @@ def parse_chess_notation(position):
 
 
 def main(input_string):
-    start, end = input_string.split(' ')
+    positions = input_string.split(' ')
+
+    if len(positions) != 2:
+        raise ValueError('Did not receive two chess notation positions')
+
+    start, end = positions
 
     path = get_shortest_path(parse_chess_notation(start), parse_chess_notation(end))
 
     return ' '.join([get_chess_notation(pos) for pos in path])
+
+
+if __name__ == '__main__':
+    print(main(' '.join(sys.argv[1:])))

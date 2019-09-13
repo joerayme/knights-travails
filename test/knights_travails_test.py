@@ -56,6 +56,13 @@ class KnightsMovementTest(unittest.TestCase):
         except ValueError as e:
             self.assertEqual('"A111" is not valid chess notation', str(e))
 
+    def test_main_checks_number_of_args(self):
+        try:
+            main('A1')
+            self.fail('Expected "A1" input to be too short')
+        except ValueError as e:
+            self.assertEqual('Did not receive two chess notation positions', str(e))
+
 
 if __name__ == '__main__':
     unittest.main()
